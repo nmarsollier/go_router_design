@@ -2,10 +2,6 @@
 
 Este repositorio plantea ejemplos de como usar efectivamente el patrón de diseño Router en los framework REST.
 
-Esta es una serie de tutoriales sobre patrones simples de programación en GO.
-
-[Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller)
-
 ## Router Design Pattern
 
 Este patrón de diseño surge de lenguajes funcionales, muchos los frameworks modernos lo adoptan, como express, gin, etc.
@@ -36,8 +32,10 @@ Como podemos ver, la idea es descomponer una rutina grande en funciones que real
 
 ## Volviendo al Router Design Pattern
 
-El router pattern está basado en Chain of responsibility pattern
+El router pattern está basado en Chain of responsibility pattern.
+
 Existen 2 conceptos middlewares y handlers
+
 En todos los casos tenemos la opción de controlar completamente el control del request
 
 ### Middlewares
@@ -90,10 +88,12 @@ En otras implementaciones podríamos bloquear la llamada a Next de ser necesario
 
 El funcionamiento es el mismo que el de middleware, solo que aplican a una ruta en particular.
 
-Son muy utiles para 
+Conviene estructurar la aplicación, de acuerdo al concepto expuesto en [Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller), porque tener una correcta visibilidad de las rutas y los handlers es muy importante.
+
+Son muy útiles para 
 
 - Validar requests
-- Validar autorizacion a recursos
+- Validar autorización a recursos
 - Validar estructuras de datos
 - Precarga de datos relacionados
 
@@ -195,3 +195,9 @@ En el ejemplo anterior, el middleware es AuthValidator, donde se buscara de acue
 Cuando algún controller quiera obtener este dato, llamara a CurrentUserProfile, que nos retornara el dato en el contexto.
 
 De esta forma controlamos, encapsulamos y desacoplamos la estrategia de cache en contextos.
+
+## Nota
+
+Esta es una serie de tutoriales sobre patrones simples de programación en GO.
+
+[Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller)
