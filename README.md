@@ -196,8 +196,31 @@ Cuando algún controller quiera obtener este dato, llamara a CurrentUserProfile,
 
 De esta forma controlamos, encapsulamos y desacoplamos la estrategia de cache en contextos.
 
+### Usar middlewares como Builder Pattern ?
+
+Bueno, visto lo anterior, si pensamos como funciona el patron builder por ejemplo :
+
+```	
+dialog.NewBuilder().Title("hola").AcceptAction("Aceptar", "ok").Build()
+```
+
+Esto lo trasladariamos en algo como :
+
+```
+	getRouter().GET(
+		"/dialog",
+		setTitle,
+		setAcceptAction,
+		build
+	)
+```
+
+Podríamos pensar en algún escenario donde la información se genere de formas complejas y nos convenga generar un respuesta en forma segregada utilizando el router como patrón Builder.
+
 ## Nota
 
 Esta es una serie de tutoriales sobre patrones simples de programación en GO.
 
 [Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller)
+
+[Capítulo 4: REST Controllers en go](https://github.com/nmarsollier/go_declarative)
