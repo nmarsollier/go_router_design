@@ -1,4 +1,4 @@
-# Capítulo 4: Router Design Pattern
+# Router Design Pattern
 
 Este repositorio plantea ejemplos de como usar efectivamente el patrón de diseño Router en los framework REST.
 
