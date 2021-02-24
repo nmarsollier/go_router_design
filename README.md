@@ -1,4 +1,4 @@
-# Capítulo 3: Router Design Pattern
+# Capítulo 4: Router Design Pattern
 
 Este repositorio plantea ejemplos de como usar efectivamente el patrón de diseño Router en los framework REST.
 
@@ -219,8 +219,6 @@ Podríamos pensar en algún escenario donde la información se genere de formas 
 
 ## Nota
 
-Esta es una serie de tutoriales sobre patrones simples de programación en GO.
+Esta es una serie de notas sobre patrones simples de programación en GO.
 
-[Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller)
-
-[Capítulo 4: REST Controllers en go](https://github.com/nmarsollier/go_declarative)
+[Tabla de Contenidos](https://github.com/nmarsollier/go_index)
