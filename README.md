@@ -18,7 +18,7 @@ En su forma mas simple, es una ruta y un handler.
 
 ## Chain Of Responsibility
 
-Pero el concepto de Route pattern va mas allá, para comprenderlo, necesitamos conocer un poco mas del patrón Chain of Responsibility
+Pero el concepto de Route pattern va mas allá, para comprenderlo, necesitamos conocer un poco mas del patrón Chain of Responsibility (CoR).
 
 - Es un concepto viejo de programación funcional
 - Permite reutilizar código 
@@ -32,11 +32,11 @@ Como podemos ver, la idea es descomponer una rutina grande en funciones que real
 
 ## Volviendo al Router Design Pattern
 
-El router pattern está basado en Chain of responsibility pattern.
+El router pattern está basado en CoR pattern.
 
 Existen 2 conceptos middlewares y handlers
 
-En todos los casos tenemos la opción de controlar completamente el control del request
+En todos los casos tenemos la opción de controlar completamente el control del request.
 
 ### Middlewares
 
@@ -143,7 +143,7 @@ func sayHelloHandler(c *gin.Context) {
 }
 ```
 
-Los tests son mucho mas sencillos, porque testeamos funcion por funcion en forma individual, por ejemplo :
+Los tests son mucho mas sencillos, porque testeamos función por función en forma individual, por ejemplo :
 
 ```
 func TestValidateUserName(t *testing.T) {
@@ -195,6 +195,14 @@ En el ejemplo anterior, el middleware es AuthValidator, donde se buscara de acue
 Cuando algún controller quiera obtener este dato, llamara a CurrentUserProfile, que nos retornara el dato en el contexto.
 
 De esta forma controlamos, encapsulamos y desacoplamos la estrategia de cache en contextos.
+
+## Fuentes
+
+[Routing Design Patterns](https://medium.com/@goldhand/routing-design-patterns-fed766ad35fa)
+
+[Cadena de responsabilidad](https://es.wikipedia.org/wiki/Cadena_de_responsabilidad)
+
+[Guard Clause](https://deviq.com/design-patterns/guard-clause)
 
 ## Nota
 
