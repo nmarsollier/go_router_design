@@ -1,3 +1,5 @@
+[English version](https://github.com/nmarsollier/go_router_design/blob/main/README_en.md)
+
 # Router Design Pattern
 
 Este repositorio plantea ejemplos de como usar efectivamente el patrón de diseño Router en los framework REST.
@@ -87,8 +89,6 @@ En otras implementaciones podríamos bloquear la llamada a Next de ser necesario
 ### Handlers de ruta
 
 El funcionamiento es el mismo que el de middleware, solo que aplican a una ruta en particular.
-
-Conviene estructurar la aplicación, de acuerdo al concepto expuesto en [Capítulo 2: REST Controllers en go](https://github.com/nmarsollier/go_rest_controller), porque tener una correcta visibilidad de las rutas y los handlers es muy importante.
 
 Son muy útiles para 
 
@@ -208,4 +208,4 @@ De esta forma controlamos, encapsulamos y desacoplamos la estrategia de cache en
 
 Esta es una serie de notas sobre patrones simples de programación en GO.
 
-[Tabla de Contenidos](https://github.com/nmarsollier/go_index)
+[Tabla de Contenidos](https://github.com/nmarsollier/go_index/blob/main/README.md)
