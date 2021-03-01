@@ -1,6 +1,6 @@
 package service
 
-import "github.com/nmarsollier/go_router_design/dao"
+import "github.com/nmarsollier/go_router_design/model/hello/dao"
 
 // Nos va a permitir mockear respuestas para los tests
 var daoHelloFunc func() string = dao.Hello

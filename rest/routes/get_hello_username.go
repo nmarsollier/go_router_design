@@ -1,10 +1,10 @@
-package controllers
+package routes
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/nmarsollier/go_router_design/service"
+	"github.com/nmarsollier/go_router_design/model/hello/service"
 	"github.com/nmarsollier/go_router_design/utils/errors"
 )
 

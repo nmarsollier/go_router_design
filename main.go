@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/nmarsollier/go_router_design/controllers"
-)
+import "github.com/nmarsollier/go_router_design/rest/routes"
 
 func main() {
-	controllers.Start()
+	routes.Start()
 }
