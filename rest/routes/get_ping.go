@@ -8,7 +8,7 @@ import (
 
 // Internal configure ping/pong service
 func init() {
-	getRouter().GET("/ping", pingHandler)
+	router().GET("/ping", pingHandler)
 }
 
 func pingHandler(c *gin.Context) {

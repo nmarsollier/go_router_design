@@ -10,7 +10,7 @@ import (
 
 // Internal configure ping/pong service
 func init() {
-	getRouter().GET(
+	router().GET(
 		"/hello/:userName",
 		validateUserName,
 		sayHelloHandler,

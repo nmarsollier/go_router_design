@@ -7,16 +7,16 @@ import (
 
 // Start server in 8080 port
 func Start() {
-	getRouter().Run(":8080")
+	router().Run(":8080")
 }
 
-var router *gin.Engine = nil
+var engine *gin.Engine = nil
 
-func getRouter() *gin.Engine {
-	if router == nil {
-		router = gin.Default()
-		router.Use(middlewares.ErrorHandler)
+func router() *gin.Engine {
+	if engine == nil {
+		engine = gin.Default()
+		engine.Use(middlewares.ErrorHandler)
 	}
 
-	return router
+	return engine
 }

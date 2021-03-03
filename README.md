@@ -10,7 +10,7 @@ Este patrón de diseño surge de lenguajes funcionales, muchos los frameworks mo
 
 El concepto es muy simple, definimos una ruta y llamamos a los handlers que queremos que se ejecuten.
 
-```
+```go
 func init() {
 	getRouter().GET("/ping", pingHandler)
 }
@@ -62,14 +62,14 @@ En este repositorio, podemos encontrar un ejemplo en middlewares/errors.go
 
 En la ruta lo configuramos en la configuración global del servidor: 
 
-```
+```go
 		router = gin.Default()
 		router.Use(middlewares.ErrorHandler)
 ```
 
 Y la implementación : 
 
-```
+```go
 // ErrorHandler a middleware to handle errors
 func ErrorHandler(c *gin.Context) {
 	c.Next()
@@ -107,7 +107,7 @@ Ademas nos permite reutilizar funciones, ya que los handlers son funciones, y al
 
 Como vemos en el ejemplo get_hello_username.go
 
-```
+```go
 // Internal configure ping/pong service
 func init() {
 	getRouter().GET(
@@ -133,7 +133,7 @@ La función validateUserName se define como un middleware de ruta, y valida el p
 
 Una vez realizadas todas las validaciones, el código del handler es muy simple y muy fácil de leer, porque a estas alturas nos aseguramos que todo este correcto para ejecutarlo.
 
-```
+```go
 func sayHelloHandler(c *gin.Context) {
 	userName := c.Param("userName")
 
@@ -145,7 +145,7 @@ func sayHelloHandler(c *gin.Context) {
 
 Los tests son mucho mas sencillos, porque testeamos función por función en forma individual, por ejemplo :
 
-```
+```go
 func TestValidateUserName(t *testing.T) {
 	response := test.ResponseWriter(t)
 	context, _ := gin.CreateTestContext(response)
@@ -171,7 +171,7 @@ Es totalmente factible hacerlo, con las siguientes advertencias :
 
 Un ejemplo ilustrativo podría ser :
 
-```
+```go
 func AuthValidator(segment *string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Validate user in session... get profile from db...

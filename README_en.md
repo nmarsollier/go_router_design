@@ -10,7 +10,7 @@ This framework comes with functional languages, and becomed addopted in modern r
 
 El concept is easy, we define a route, and fill the handlers that needs to be executed :
 
-```
+```go
 func init() {
 	getRouter().GET("/ping", pingHandler)
 }
@@ -61,14 +61,14 @@ In the repository we can see the error handler in middlewares/errors.go
 
 In the router we setup the global middleware: 
 
-```
+```go
 		router = gin.Default()
 		router.Use(middlewares.ErrorHandler)
 ```
 
 And this is the implementation : 
 
-```
+```go
 // ErrorHandler a middleware to handle errors
 func ErrorHandler(c *gin.Context) {
 	c.Next()
@@ -106,7 +106,7 @@ Also we can reuse functions, like parameter validations, due that handlers are f
 
 As we see in the file get_hello_username.go
 
-```
+```go
 // Internal configure ping/pong service
 func init() {
 	getRouter().GET(
@@ -132,7 +132,7 @@ function validateUserName is defined as route middleware, validates the url para
 
 Once done all validations, we can run the handler, ensuring that everything is correct.
 
-```
+```go
 func sayHelloHandler(c *gin.Context) {
 	userName := c.Param("userName")
 
@@ -144,7 +144,7 @@ func sayHelloHandler(c *gin.Context) {
 
 Tests are simpler, because each function has one thing to test :
 
-```
+```go
 func TestValidateUserName(t *testing.T) {
 	response := test.ResponseWriter(t)
 	context, _ := gin.CreateTestContext(response)
@@ -166,7 +166,7 @@ It's totally feasible, with the next warning: Preload data can only be accesses 
 
 An example :
 
-```
+```go
 func AuthValidator(segment *string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Validate user in session... get profile from db...
