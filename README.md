@@ -23,7 +23,7 @@ En su forma mas simple, es una ruta y un handler.
 Pero el concepto de Route pattern va mas allá, para comprenderlo, necesitamos conocer un poco mas del patrón Chain of Responsibility (CoR).
 
 - Es un concepto viejo de programación funcional
-- Permite reutilizar código 
+- Permite reutilizar código
 - Separa mejor las responsabilidades en funciones simples
 - Permite hacer las responsabilidades de controller de forma muy simplificada
 - Permite armar una respuesta compleja en forma ordenada y por etapas
@@ -42,7 +42,7 @@ En todos los casos tenemos la opción de controlar completamente el control del 
 
 ### Middlewares
 
-En general se les llama los handlers, y actúan sobre todas las rutas y se definen a nivel servidor. 
+En general se les llama los handlers, y actúan sobre todas las rutas y se definen a nivel servidor.
 
 Es muy util para realizar operaciones como :
 
@@ -60,14 +60,14 @@ Y muchas otras cosas mas.
 
 En este repositorio, podemos encontrar un ejemplo en middlewares/errors.go
 
-En la ruta lo configuramos en la configuración global del servidor: 
+En la ruta lo configuramos en la configuración global del servidor:
 
 ```go
-		router = gin.Default()
-		router.Use(middlewares.ErrorHandler)
+router = gin.Default()
+router.Use(middlewares.ErrorHandler)
 ```
 
-Y la implementación : 
+Y la implementación :
 
 ```go
 // ErrorHandler a middleware to handle errors
@@ -90,7 +90,7 @@ En otras implementaciones podríamos bloquear la llamada a Next de ser necesario
 
 El funcionamiento es el mismo que el de middleware, solo que aplican a una ruta en particular.
 
-Son muy útiles para 
+Son muy útiles para
 
 - Validar requests
 - Validar autorización a recursos
@@ -166,19 +166,21 @@ Muchas veces necesitaremos cierta precarga de datos en el contexto, como por eje
 Es totalmente factible hacerlo, con las siguientes advertencias :
 
 - Los datos que se agreguen en el contexto solo se deben acceder por controllers o middlewares, no desde servicios de negocio.
-- No conviene encapsular la función que obtiene el dato del contexto en el mismo middleware. 
+- No conviene encapsular la función que obtiene el dato del contexto en el mismo middleware.
 - No conviene abusar de esta estrategia.
 
 Un ejemplo ilustrativo podría ser :
 
 ```go
-func AuthValidator(segment *string) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Validate user in session... get profile from db...
-		userProfile := userDao.FindUserByToken(token)
-
-		c.Set("profile", userProfile)
+func LoadCurrentUser(c *gin.Context) {
+  token, err := c.GetHeader("Authorization")
+	if err != nil {
+		return
 	}
+
+	userProfile := userDao.FindUserByToken(token)
+
+	c.Set("profile", userProfile)
 }
 
 func CurrentUserProfile(c *gin.Context) *users.Profile {
@@ -187,10 +189,9 @@ func CurrentUserProfile(c *gin.Context) *users.Profile {
 	}
 	return nil
 }
-
 ```
 
-En el ejemplo anterior, el middleware es AuthValidator, donde se buscara de acuerdo al token el perfil de usuario correspondiente.
+En el ejemplo anterior, el middleware es LoadCurrentUser, donde se buscara de acuerdo al token el perfil de usuario correspondiente.
 
 Cuando algún controller quiera obtener este dato, llamara a CurrentUserProfile, que nos retornara el dato en el contexto.
 

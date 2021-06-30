@@ -30,7 +30,7 @@ But the concept goes far away from there, to understand it, we need to know bett
 
 ![Chain of Responsibility](./img/cor.png)
 
-As we can see, the idea is to to Como podemos ver, la idea is to break down a big routine in small functions that does only one thing, each function can  continue or break the flow.
+As we can see, the idea is to to Como podemos ver, la idea is to break down a big routine in small functions that does only one thing, each function can continue or break the flow.
 
 ## Back to Router Design Pattern
 
@@ -42,7 +42,7 @@ In both we have full control over the request.
 
 ### Middlewares
 
-Generally we call them handlers, and the are used by the router in a high level, all the routes are affected by them. 
+Generally we call them handlers, and the are used by the router in a high level, all the routes are affected by them.
 
 The are useful for :
 
@@ -59,14 +59,14 @@ And much more.
 
 In the repository we can see the error handler in middlewares/errors.go
 
-In the router we setup the global middleware: 
+In the router we setup the global middleware:
 
 ```go
-		router = gin.Default()
-		router.Use(middlewares.ErrorHandler)
+router = gin.Default()
+router.Use(middlewares.ErrorHandler)
 ```
 
-And this is the implementation : 
+And this is the implementation :
 
 ```go
 // ErrorHandler a middleware to handle errors
@@ -85,14 +85,14 @@ This handler calls first c.Next, that corresponds to the next call in the chain,
 
 In other implementations we could block the Next execution if needed.
 
-### Route Handlers 
+### Route Handlers
 
 It's the same as the middleware, but applies to single routes.
 
 They are useful to :
 
 - Validate requests
-- Validate authorization 
+- Validate authorization
 - Validate body structs and parameters
 - Preload related data
 
@@ -167,13 +167,15 @@ It's totally feasible, with the next warning: Preload data can only be accesses 
 An example :
 
 ```go
-func AuthValidator(segment *string) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Validate user in session... get profile from db...
-		userProfile := userDao.FindUserByToken(token)
-
-		c.Set("profile", userProfile)
+func LoadCurrentUser(c *gin.Context) {
+  token, err := c.GetHeader("Authorization")
+	if err != nil {
+		return
 	}
+
+	userProfile := userDao.FindUserByToken(token)
+
+	c.Set("profile", userProfile)
 }
 
 func CurrentUserProfile(c *gin.Context) *users.Profile {
@@ -182,10 +184,11 @@ func CurrentUserProfile(c *gin.Context) *users.Profile {
 	}
 	return nil
 }
-
 ```
 
-In the previous same, the same middleware that prefill the data AuthValidator, is the one that will look int to the context to get the related data.
+In the previous same, the same middleware that preload the data LoadCurrentUser, is the one that will look int to the context to get the related data.
+
+When we need to get the current user we call CurrentUserProfile.
 
 ## Source
 
